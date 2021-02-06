@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:socialMedia/Auth/Google.dart';
+
+GoogleSignIn googleSignIn = GoogleSignIn();
 
 class HomePage extends StatefulWidget {
   @override
@@ -8,7 +13,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool isSignedIn = false;
   Widget buildHomeScreen() {
-    return Text("Already Signed IN");
+    return MaterialButton(
+      color: Colors.pink,
+      onPressed: () => signOutGoogle(),
+      child: Text("Logout"),
+    );
   }
 
   Widget buildSignInScreen() {
@@ -18,12 +27,31 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              "Instagram",
-              style: Googlefont(
-                fontSize: 92,
-                color: Colors.white,
-
+            Text("Instagram",
+                style:
+                    GoogleFonts.oleoScript(fontSize: 90, color: Colors.white)),
+            SizedBox(height: 10),
+            GestureDetector(
+              onTap: () {
+                signInWithGoogle().then((result) {
+                  if (result != null) {
+                    setState(() {
+                      isSignedIn = true;
+                    });
+                  } else {
+                    print("BULL");
+                  }
+                });
+              },
+              child: Container(
+                width: 270,
+                height: 65,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/goggle.png"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             )
           ],
