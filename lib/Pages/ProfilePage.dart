@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:socialMedia/Widgets/HeaderWidget.dart';
 
-class TimeLinePage extends StatefulWidget {
+class ProfilePage extends StatefulWidget {
   @override
-  _TimeLinePageState createState() => _TimeLinePageState();
+  _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _TimeLinePageState extends State<TimeLinePage> {
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: header(
         context,
-        isApptitle: true,
+        isApptitle: false,
+        strTitle: "Profile",
       ),
     );
   }

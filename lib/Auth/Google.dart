@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:socialMedia/Backend/FirebaseFunctions.dart';
+
+// FirebaseFunctions firebaseFunctions = FirebaseFunctions();
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -9,7 +12,7 @@ String name;
 String email;
 String imageUrl;
 
-Future<String> signInWithGoogle() async {
+Future signInWithGoogle(context) async {
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
   final GoogleSignInAuthentication googleSignInAuthentication =
       await googleSignInAccount.authentication;
@@ -38,8 +41,8 @@ Future<String> signInWithGoogle() async {
 
     final FirebaseUser currentUser = await _auth.currentUser();
     assert(user.uid == currentUser.uid);
-    print(user.displayName);
-    return '$user';
+
+    return googleSignInAccount;
   }
   return null;
 }
